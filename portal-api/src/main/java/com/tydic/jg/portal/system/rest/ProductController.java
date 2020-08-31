@@ -64,6 +64,10 @@ public class ProductController {
     }
 
     @PutMapping("/{id}/users")
+    @ApiOperation(value = "产品订购信息", notes = "产品订购信息的接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "path", dataType = "int", name = "id", value = "产品id")
+    })
     public ResponseEntity<Void> subscribe(@PathVariable("id") int id) {
         productInfoService.subscribe(id);
         return ResponseEntity
@@ -72,6 +76,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}/users")
+    @ApiOperation(value = "产品退订信息", notes = "产品退订信息的接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "path", dataType = "int", name = "id", value = "产品id")
+    })
     public ResponseEntity<Void> unSubscribe(@PathVariable("id") int id) {
         productInfoService.unSubscribe(id);
         return ResponseEntity
@@ -80,6 +88,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/users")
+    @ApiOperation(value = "产品退订信息", notes = "产品退订信息的接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "path", dataType = "int", name = "id", value = "产品id"),
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "page", value = "分页页数"),
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "size", value = "分页大小")
+    })
     public ResponseEntity<Set<UserRepresentation>> getSubscribeUsers(@PathVariable("id") int id,
                                                                      @RequestParam(required = false) Integer page,
                                                                      @RequestParam(required = false) Integer size) {
